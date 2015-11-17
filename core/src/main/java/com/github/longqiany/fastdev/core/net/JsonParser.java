@@ -50,6 +50,26 @@ public class JsonParser {
         }
     }
 
+    public static ResultObject parseNoClz(String response) {
+        if (response == null) {
+            //TODO
+            return getROwithNull();
+        } else {
+            Map map = gson.fromJson(response, Map.class);
+            Integer code = ((Double) map.get("code")).intValue();
+            String message = (String) map.get("message");
+            checkToken(map);
+            if (code != SUCCESS) {
+                return getErrorRO(code, message);
+            } else {
+                ResultObject resultObject = ResultFactory.getro();
+                resultObject.setMessage(message);
+                resultObject.setSuccess(true);
+                resultObject.setCode(code);
+                return resultObject;
+            }
+        }
+    }
 
     /**
      * 用于解析 data 里面只有一个 key value 的情况。 不用定义 Bean 就可以解析数据。
