@@ -94,7 +94,7 @@ class TimingsListener implements TaskExecutionListener, BuildListener {
     void settingsEvaluated(Settings settings) {}
 }
 
-uploadArchives {
+/*uploadArchives {
     repositories {
         mavenDeployer {
             pom.groupId = GROUP_ID
@@ -108,7 +108,7 @@ uploadArchives {
             }
         }
     }
-}
+}*/
 // build a jar with source files
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
