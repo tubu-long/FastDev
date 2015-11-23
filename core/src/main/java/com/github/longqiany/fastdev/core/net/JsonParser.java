@@ -4,8 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.github.longqiany.fastdev.core.FastDevApplication;
-import com.github.longqiany.fastdev.core.net.ResultFactory;
-import com.github.longqiany.fastdev.core.net.ResultObject;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
