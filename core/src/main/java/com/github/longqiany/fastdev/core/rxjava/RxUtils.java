@@ -1,7 +1,7 @@
 package com.github.longqiany.fastdev.core.rxjava;
 
 import com.github.longqiany.fastdev.core.net.HttpClient;
-import com.github.longqiany.fastdev.core.net.JsonParser;
+import com.github.longqiany.fastdev.core.net.GsonParser;
 import com.github.longqiany.fastdev.core.net.ResultObject;
 
 import java.io.IOException;
@@ -40,7 +40,6 @@ public class RxUtils {
                 });
     }
 
-
     /**
      * 入参为 EntityBean 形式的请求
      * @param path
@@ -72,7 +71,7 @@ public class RxUtils {
         return new Func1<String, ResultObject>() {
             @Override
             public ResultObject call(String s) {
-                return JsonParser.parse2Entity(s, clz);
+                return GsonParser.parse2Entity(s, clz);
             }
         };
     }
@@ -86,7 +85,7 @@ public class RxUtils {
         return new Func1<String, ResultObject>() {
             @Override
             public ResultObject call(String s) {
-                return JsonParser.parseObject(s, key);
+                return GsonParser.parseObject(s, key);
             }
         };
     }
@@ -99,7 +98,7 @@ public class RxUtils {
         return new Func1<String, ResultObject>() {
             @Override
             public ResultObject call(String s) {
-                return JsonParser.parse2Map(s);
+                return GsonParser.parse2Map(s);
             }
         };
     }
@@ -114,7 +113,7 @@ public class RxUtils {
         return new Func1<String, ResultObject>() {
             @Override
             public ResultObject call(String s) {
-                return JsonParser.parse2List(s, key, t);
+                return GsonParser.parse2List(s, key, t);
             }
         };
     }
@@ -127,7 +126,7 @@ public class RxUtils {
         return new Func1<String, ResultObject>() {
             @Override
             public ResultObject call(String s) {
-                return JsonParser.parseNoClz(s);
+                return GsonParser.parseNoClz(s);
             }
         };
     }

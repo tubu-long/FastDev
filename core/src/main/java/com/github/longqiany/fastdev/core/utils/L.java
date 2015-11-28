@@ -2,6 +2,9 @@ package com.github.longqiany.fastdev.core.utils;
 
 import android.util.Log;
 
+import com.github.longqiany.fastdev.core.FastDevApplication;
+import com.github.longqiany.fastdev.core.R;
+
 /**
  * 输出日志开关。上线时关闭
  *
@@ -12,7 +15,7 @@ public class L {
 
     private static boolean isDebug = true;
 //        private static boolean isDebug = false;
-    private static final String TAG = "TAG";
+    private static final String TAG = FastDevApplication.getInstance().getString(R.string.tag);
 
     private L() {
         throw new UnsupportedOperationException("cannot be instantiated");

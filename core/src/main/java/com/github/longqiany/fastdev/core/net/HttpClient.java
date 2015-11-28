@@ -2,8 +2,11 @@ package com.github.longqiany.fastdev.core.net;
 
 import android.os.Handler;
 
+import com.github.longqiany.fastdev.core.FastDevApplication;
+import com.github.longqiany.fastdev.core.R;
 import com.github.longqiany.fastdev.core.utils.StringUtils;
 import com.google.gson.Gson;
+import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.FormEncodingBuilder;
 import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
@@ -30,11 +33,12 @@ import okio.BufferedSink;
  */
 public class HttpClient {
     private static final OkHttpClient client = new OkHttpClient();
-    //    private static BaseInfos mInfos ;
     private Gson gson;
+    private static final String param1 = FastDevApplication.getInstance().getString(R.string.param1);
+    private static final String param2 = FastDevApplication.getInstance().getString(R.string.param1);
+    private static boolean cacheable = false;
     public HttpClient(/*BaseInfos mInfos*/) {
         super();
-//        this.mInfos = mInfos;
         gson = new Gson();
         client.setConnectTimeout(20, TimeUnit.SECONDS);
         client.setWriteTimeout(20, TimeUnit.SECONDS);
@@ -42,16 +46,30 @@ public class HttpClient {
     }
 
 
+    private static void setCache(int size) {
+        int cacheSize = size *1024 *1024;
+        File cacheDir = FastDevApplication.getInstance().getCacheDir();
+        Cache cache = new Cache(cacheDir, cacheSize);
+        client.setCache(cache);
+    }
+
+    public static void setCacheable(boolean b) {
+        cacheable = b ;
+        if (cacheable) {
+            setCache(10);
+        }else {
+            client.setCache(null);
+        }
+    }
 
     public String postEntity(String url, Object entity ,LinkedHashMap baseMap) throws IOException {
-//        LinkedHashMap baseMap = mInfos.getBase();
         String param = gson.toJson(entity);
         String sign = ParamBuild.getSign(entity, baseMap);
         baseMap.put("sign", sign);
         String base = gson.toJson(baseMap);
         RequestBody formBody = new FormEncodingBuilder()
-                .add("base", base)
-                .add("param", param)
+                .add(param1, base)
+                .add(param2, param)
                 .build();
         URL myurl = new URL(url);
         Request request = new Request.Builder()
@@ -86,8 +104,8 @@ public class HttpClient {
         String base = gson.toJson(baseMap);
 
         RequestBody formBody = new FormEncodingBuilder()
-                .add("base", base)
-                .add("param", param)
+                .add(param1, base)
+                .add(param2, param)
                 .build();
         URL myurl = new URL(url);
         Request request = new Request.Builder()

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tag">FastDev</string>
+
+    <!--http param 定义的入参-->
+    <string name="param1">base</string>
+    <string name="param2">param</string>
+    <string name="param3">FastDev</string>
+    <string name="param4">FastDev</string>
+
+</resources>

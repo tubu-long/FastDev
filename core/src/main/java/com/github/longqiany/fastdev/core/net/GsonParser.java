@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Created by zzz on 11/16/15.
  */
-public class JsonParser {
+public class GsonParser {
     private final static int SUCCESS = 100000;
     private static Gson gson;
     public static void main(String[] args) {
