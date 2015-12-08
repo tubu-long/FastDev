@@ -248,7 +248,7 @@ public class Utils {
      * @param context
      * @return
      */
-    public static double getLocation(Context context, boolean isX) {
+    public static double getLocation(Context context, boolean isLat) {
         double position = 0;
         LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -257,7 +257,7 @@ public class Utils {
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
         if (location != null) {
-            if (isX) {
+            if (isLat) {
                 double latitude = location.getLatitude();
                 position = latitude;
             } else {
@@ -273,6 +273,7 @@ public class Utils {
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         if (location == null) {
+
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
         return location;

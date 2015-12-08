@@ -520,6 +520,27 @@ public class StringUtils {
         return  builder.toString();
     }
 
+
+    public static String toSafeFileName(String name) {
+        int size = name.length();
+        StringBuilder builder = new StringBuilder(size * 2);
+        for (int i = 0; i < size; i++) {
+            char c = name.charAt(i);
+            boolean valid = c >= 'a' && c <= 'z';
+            valid = valid || (c >= 'A' && c <= 'Z');
+            valid = valid || (c >= '0' && c <= '9');
+            valid = valid || (c == '_') || (c == '-') || (c == '.');
+
+            if (valid) {
+                builder.append(c);
+            } else {
+                // Encode the character using hex notation
+                builder.append('x');
+                builder.append(Integer.toHexString(i));
+            }
+        }
+        return builder.toString();
+    }
     /**
      * 删除% & 符号
      *

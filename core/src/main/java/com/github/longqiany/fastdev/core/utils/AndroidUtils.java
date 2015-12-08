@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * 设备相关的方法
  */
-public class DeviceTools {
+public class AndroidUtils {
 
     /**
      * 用来判断服务是否运行.

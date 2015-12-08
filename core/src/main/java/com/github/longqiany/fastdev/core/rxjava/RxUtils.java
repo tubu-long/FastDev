@@ -9,7 +9,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by zzz on 11/16/15.
@@ -27,16 +29,13 @@ public class RxUtils {
      */
     public static Observable<String> postMap(final String path, final Map map,final LinkedHashMap baseMap) {
         return Observable.just(path)
-                .map(new Func1<String, String>() {
-                    @Override
-                    public String call(String s) {
-                        try {
-                            return client.postMap(path, map,baseMap);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
+                .map(s -> {
+                    try {
+                        return client.postMap(path, map,baseMap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    return null;
                 });
     }
 
@@ -48,16 +47,13 @@ public class RxUtils {
      */
     public static Observable<String> postEntity(final String path, final Object o,final LinkedHashMap baseMap) {
         return Observable.just(path)
-                .map(new Func1<String, String>() {
-                    @Override
-                    public String call(String s) {
-                        try {
-                            return client.postEntity(path, o,baseMap);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        return null;
+                .map(s -> {
+                    try {
+                        return client.postEntity(path, o,baseMap);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    return null;
                 });
     }
 
@@ -68,12 +64,7 @@ public class RxUtils {
      * @return
      */
     public static Func1<String , ResultObject> getObject(final Class<?> clz){
-        return new Func1<String, ResultObject>() {
-            @Override
-            public ResultObject call(String s) {
-                return GsonParser.parse2Entity(s, clz);
-            }
-        };
+        return s -> GsonParser.parse2Entity(s, clz);
     }
 
     /**
@@ -82,12 +73,7 @@ public class RxUtils {
      * @return
      */
     public static Func1<String , ResultObject> getObject(final String key){
-        return new Func1<String, ResultObject>() {
-            @Override
-            public ResultObject call(String s) {
-                return GsonParser.parseObject(s, key);
-            }
-        };
+        return s -> GsonParser.parseObject(s, key);
     }
 
     /**
@@ -95,12 +81,7 @@ public class RxUtils {
      * @return
      */
     public static Func1<String , ResultObject> getMap(){
-        return new Func1<String, ResultObject>() {
-            @Override
-            public ResultObject call(String s) {
-                return GsonParser.parse2Map(s);
-            }
-        };
+        return s -> GsonParser.parse2Map(s);
     }
 
     /**
@@ -110,12 +91,7 @@ public class RxUtils {
      * @return
      */
     public static <T>Func1<String , ResultObject> getList(final String key,final T t){
-        return new Func1<String, ResultObject>() {
-            @Override
-            public ResultObject call(String s) {
-                return GsonParser.parse2List(s, key, t);
-            }
-        };
+        return s -> GsonParser.parse2List(s, key, t);
     }
 
     /**
@@ -123,12 +99,26 @@ public class RxUtils {
      * @return
      */
     public static Func1<String , ResultObject> getNoClz(){
-        return new Func1<String, ResultObject>() {
-            @Override
-            public ResultObject call(String s) {
-                return GsonParser.parseNoClz(s);
-            }
+        return s -> GsonParser.parseNoClz(s);
+    }
+
+
+    /**
+     * 单界面多接口调用情况，复用 Subscriber 的情况。
+     * @param flag
+     * @return
+     */
+    public static Func1<ResultObject , ResultObject> setFlag(final String flag){
+        return ro -> {
+            ro.setFlag(flag);
+            return ro;
         };
     }
 
+
+    public static Observable.Transformer <ResultObject,ResultObject> mainAsync() {
+        return obs -> obs
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 }

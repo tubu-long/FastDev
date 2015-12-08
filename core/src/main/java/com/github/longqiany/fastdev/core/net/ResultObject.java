@@ -8,7 +8,16 @@ public class ResultObject {
     private String message;
     private int code;
     private int total;
+    private String flag;
     private Object object;
+
+    public String getFlag() {
+        return flag;
+    }
+
+    public void setFlag(String flag) {
+        this.flag = flag;
+    }
 
     public ResultObject() {
         super();
