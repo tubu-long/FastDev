@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.ResolveInfo;
+import android.os.Build;
 import android.os.PowerManager;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
@@ -27,7 +28,7 @@ public class AndroidUtils {
      * 用来判断服务是否运行.
      *
      * @param mContext
-     * @param clazz 判断的服务名字
+     * @param clazz    判断的服务名字
      * @return true 在运行 false 不在运行
      */
     public static boolean isServiceRunning(Context mContext, Class clazz) {
@@ -241,15 +242,18 @@ public class AndroidUtils {
     }
 
     /**
-     * 启动已安装APP
-     *
+     * 屏幕是否亮着
      * @param context
-     * @param packageName
      * @return
      */
     public static boolean judgeIsScreenOn(Context context) {
         PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-        return pm.isScreenOn();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH) {
+            return pm.isInteractive();
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT_WATCH) {
+            return pm.isScreenOn();
+        }
+        return false;
     }
 
 }

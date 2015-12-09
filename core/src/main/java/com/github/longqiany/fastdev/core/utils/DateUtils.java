@@ -149,38 +149,5 @@ public class DateUtils {
 
 
 
-    /**
-     * 当前时间加上时间
-     *
-     * @param format
-     * @param StrDate
-     * @param year
-     * @param month
-     * @param day
-     * @return
-     */
-    public static String getSysDate(String format, String StrDate, int year,
-                                    int month, int day) {
-
-        java.text.DateFormat df = new SimpleDateFormat(format);
-        Calendar cal = Calendar.getInstance();// 日历对象
-        try {
-            // long dateLong = .getTime()
-            cal.setTime(DateUtil.strToDate(StrDate, format));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        if (day != 0) {
-            cal.add(cal.DATE, day);
-        }
-        if (month != 0) {
-            cal.add(cal.MONTH, month);
-        }
-        if (year != 0) {
-            cal.add(cal.YEAR, year);
-
-        }
-        return df.format(cal.getTime());
-    }
 
 }

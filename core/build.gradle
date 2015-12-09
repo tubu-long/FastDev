@@ -130,6 +130,21 @@ class TimingsListener implements TaskExecutionListener, BuildListener {
         }
     }
 }*/
+
+//显示详细的测试项目通过与失败
+tasks.withType(Test) {
+    testLogging {
+        exceptionFormat "full"
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+        showStandardStreams = true
+    }
+}
+
+//显示更多的 lint 警告
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+}
+
 // build a jar with source files
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
