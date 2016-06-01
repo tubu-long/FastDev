@@ -2,7 +2,7 @@ package com.github.longqiany.fastdev.core.base;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import com.github.longqiany.fastdev.core.FastDevApplication;
+import com.github.longqiany.fastdev.core.FastApplication;
 import com.squareup.leakcanary.RefWatcher;
 
 /**
@@ -17,7 +17,7 @@ public class BaseFrament extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        RefWatcher refWatcher = FastDevApplication.getRefWatcher();
+        RefWatcher refWatcher = FastApplication.getRefWatcher();
         refWatcher.watch(this);
     }
 }

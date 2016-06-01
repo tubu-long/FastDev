@@ -3,7 +3,7 @@ package com.github.longqiany.fastdev.core.net;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.github.longqiany.fastdev.core.FastDevApplication;
+import com.github.longqiany.fastdev.core.FastApplication;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -257,7 +257,7 @@ public class GsonParser {
      */
     private static void save(String token) {
         if (!"".equals(token)) {
-            SharedPreferences sp = FastDevApplication.getInstance().getSharedPreferences("", Context.MODE_PRIVATE);
+            SharedPreferences sp = FastApplication.getInstance().getSharedPreferences("", Context.MODE_PRIVATE);
             SharedPreferences.Editor edit = sp.edit();
             edit.putString("token", token);
             edit.commit();

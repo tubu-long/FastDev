@@ -3,7 +3,7 @@
     package="com.github.longqiany.fastdev.core">
 
     <application
-        android:name=".FastDevApplication"
+        android:name=".FastApplication"
         android:allowBackup="true"
         android:label="@string/app_name">
     </application>

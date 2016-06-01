@@ -2,7 +2,7 @@ package com.github.longqiany.fastdev.core.utils;
 
 import android.util.Log;
 
-import com.github.longqiany.fastdev.core.FastDevApplication;
+import com.github.longqiany.fastdev.core.FastApplication;
 import com.github.longqiany.fastdev.core.R;
 
 /**
@@ -15,7 +15,7 @@ public class L {
 
     private static boolean isDebug = true;
 //        private static boolean isDebug = false;
-    private static final String TAG = FastDevApplication.getInstance().getString(R.string.tag);
+    private static final String TAG = FastApplication.getInstance().getString(R.string.tag);
 
     private L() {
         throw new UnsupportedOperationException("cannot be instantiated");

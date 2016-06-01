@@ -2,7 +2,7 @@ package com.github.longqiany.fastdev.core.net;
 
 import android.os.Handler;
 
-import com.github.longqiany.fastdev.core.FastDevApplication;
+import com.github.longqiany.fastdev.core.FastApplication;
 import com.github.longqiany.fastdev.core.R;
 import com.github.longqiany.fastdev.core.utils.StringUtils;
 import com.google.gson.Gson;
@@ -34,8 +34,8 @@ import okio.BufferedSink;
 public class HttpClient {
     private static final OkHttpClient client = new OkHttpClient();
     private Gson gson;
-    private static final String param1 = FastDevApplication.getInstance().getString(R.string.param1);
-    private static final String param2 = FastDevApplication.getInstance().getString(R.string.param1);
+    private static final String param1 = FastApplication.getInstance().getString(R.string.param1);
+    private static final String param2 = FastApplication.getInstance().getString(R.string.param1);
     private static boolean cacheable = false;
     public HttpClient(/*BaseInfos mInfos*/) {
         super();
@@ -48,7 +48,7 @@ public class HttpClient {
 
     private static void setCache(int size) {
         int cacheSize = size *1024 *1024;
-        File cacheDir = FastDevApplication.getInstance().getCacheDir();
+        File cacheDir = FastApplication.getInstance().getCacheDir();
         Cache cache = new Cache(cacheDir, cacheSize);
         client.setCache(cache);
     }

@@ -3,24 +3,24 @@ package com.github.longqiany.fastdev.core.utils;
 import android.content.Context;
 import android.widget.Toast;
 
-import com.github.longqiany.fastdev.core.FastDevApplication;
+import com.github.longqiany.fastdev.core.FastApplication;
 
 public class ToastUtil {
 
     public static void show(String info) {
-        Toast.makeText(FastDevApplication.getInstance(), info, Toast.LENGTH_LONG).show();
+        Toast.makeText(FastApplication.getInstance(), info, Toast.LENGTH_LONG).show();
     }
 
     public static void show(int rid) {
-        Toast.makeText(FastDevApplication.getInstance(), rid, Toast.LENGTH_LONG).show();
+        Toast.makeText(FastApplication.getInstance(), rid, Toast.LENGTH_LONG).show();
     }
 
     public static void showS(String info) {
-        Toast.makeText(FastDevApplication.getInstance(), info, Toast.LENGTH_SHORT).show();
+        Toast.makeText(FastApplication.getInstance(), info, Toast.LENGTH_SHORT).show();
     }
 
     public static void showS(int rid) {
-        Toast.makeText(FastDevApplication.getInstance(), rid, Toast.LENGTH_SHORT).show();
+        Toast.makeText(FastApplication.getInstance(), rid, Toast.LENGTH_SHORT).show();
     }
 
 

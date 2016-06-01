@@ -8,22 +8,22 @@ import com.squareup.leakcanary.RefWatcher;
 /**
  * Created by zzz on 15/11/12.
  */
-public class FastDevApplication extends Application {
+public class FastApplication extends Application {
 
     private RefWatcher refWatcher;
-    private static FastDevApplication instance;
+    private static FastApplication instance;
     @Override
     public void onCreate() {
         super.onCreate();
-        instance = (FastDevApplication) getApplicationContext();
+        instance = (FastApplication) getApplicationContext();
         refWatcher = LeakCanary.install(this);
     }
 
-    public static FastDevApplication getInstance() {
+    public static FastApplication getInstance() {
         return instance;
     }
     public static RefWatcher getRefWatcher() {
-        return FastDevApplication.getInstance().refWatcher;
+        return FastApplication.getInstance().refWatcher;
     }
 
 }
