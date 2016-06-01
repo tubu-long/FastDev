@@ -19,7 +19,8 @@ public class ParamBuild {
     private static final String STUB = "0";
     private static Gson gson = new Gson();
     public static void main(String[] str) {
-
+        String aaa = getSecurity("aaa", 111);
+        char[] chars = aaa.toCharArray();
     }
 
 

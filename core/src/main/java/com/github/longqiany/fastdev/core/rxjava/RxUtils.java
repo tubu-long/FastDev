@@ -49,7 +49,7 @@ public class RxUtils {
         return Observable.just(path)
                 .map(s -> {
                     try {
-                        return client.postEntity(path, o,baseMap);
+                        return client.postEntity(path, o, baseMap);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
